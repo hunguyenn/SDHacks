@@ -2405,8 +2405,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-warning.active,
 .open .dropdown-toggle.btn-warning {
   color: #ffffff;
-  background-color: #ed9c28;
-  border-color: #d58512;
+  background-color: #2CC7DB; 
+  border-color: #29BBCF;
 }
 
 .btn-warning:active,
