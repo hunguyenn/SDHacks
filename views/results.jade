@@ -1,5 +1,19 @@
-block content
-	title='Results for ' + lenderID
-	h1=lenderID
-	include results.html
-	
+doctype html
+html(lang="en")
+  head
+    title='Results for ' + lenderID
+    h1=lenderID
+  link(href='stylesheets/bootstrap.css', rel='stylesheet')
+  link(href='stylesheets/main.css', rel='stylesheet')
+  link(href='stylesheets/world.css', rel='stylesheet')
+  
+  .navbar.navbar-default.navbar-fixed-top
+    .container
+      .navbar-header
+        a.navbar-brand(href='/')
+          b CALCULATE IMPACT
+  
+  body
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js')
+    script(src='javascripts/world.js')

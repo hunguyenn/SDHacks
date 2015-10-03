@@ -1,48 +1,3 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-
-<link href="stylesheets/bootstrap.css" rel="stylesheet">
-<link href="stylesheets/main.css" rel="stylesheet">
-<style>
-
-body {
-  background: #E8E8E8;
-}
-
-.stroke {
-  fill: none;
-  stroke: #000;
-  stroke-width: 3px;
-}
-
-.fill {
-  fill: #fff;
-}
-
-.graticule {
-  fill: none;
-  stroke: #777;
-  stroke-width: .5px;
-  stroke-opacity: .5;
-}
-
-.land {
-  fill: #86C975;
-}
-
-.boundary {
-  fill: none;
-  stroke: #fff;
-  stroke-width: .5px;
-}
-
-</style>
-
-<body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
-<script>
-
 var width = 960,
     height = 500,
     rotate = [10, -10],
@@ -102,6 +57,3 @@ function bgscroll(){
 }
 
 setInterval(bgscroll, scrollSpeed);
-
-</script>
-</body>
