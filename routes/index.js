@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 		if(requestResponse['loans'] == undefined) {
 			res.redirect('/');
 		} else {
-			console.log(body) // Prints out full contents of JSON
+			// console.log(body) // Prints out full contents of JSON
 
 			//var numPages = requestResponse['paging']['pages'] // Need for later, only testing on one page right now
 			var loansPerPage = requestResponse['paging']['page_size']
@@ -30,12 +30,11 @@ router.get('/', function(req, res, next) {
 					})
 				}
 			}
-
+			// Use places to plot ()
 			////// Places -> need to get rid of undefined & make cities more consitent (PILAR -> Pilar)
 
-			console.log(places) // Don't delete, good for debugging
-
-			res.render('results', {lenderID: req.query['lenderID']});
+			//console.log(places) // Don't delete, good for debugging
+			res.render('results', {lenderID: req.query['lenderID'], places: JSON.stringify(places)});
 		}
 	})
 	} else {
