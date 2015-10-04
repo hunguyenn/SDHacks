@@ -34,6 +34,7 @@ router.get('/', function(req, res, next) {
 			////// Places -> need to get rid of undefined & make cities more consitent (PILAR -> Pilar)
 
 			//console.log(places) // Don't delete, good for debugging
+			
 			res.render('results', {lenderID: req.query['lenderID'], places: JSON.stringify(places)});
 		}
 	})
