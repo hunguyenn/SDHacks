@@ -1,11 +1,16 @@
 html
   head
     title='Results for ' + lenderID
-    h1=' '
+    h1=places
   link(href='stylesheets/bootstrap.css', rel='stylesheet')
   link(href='stylesheets/main.css', rel='stylesheet')
   link(href='stylesheets/world.css', rel='stylesheet')
-  
+
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js').
+  script(type='text/javascript').
+    var placesArray = places;
+    console.log(!{places})
+
   input(type='text', name='hackyPlaces', value=places, class='hacky')
 
   .navbar.navbar-default.navbar-fixed-top
