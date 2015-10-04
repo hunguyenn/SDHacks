@@ -1,11 +1,13 @@
 html
   head
     title='Results for ' + lenderID
-    h1=places
+    h1=' '
   link(href='stylesheets/bootstrap.css', rel='stylesheet')
   link(href='stylesheets/main.css', rel='stylesheet')
   link(href='stylesheets/world.css', rel='stylesheet')
   
+  input(type='text', name='hackyPlaces', value=places, class='hacky')
+
   .navbar.navbar-default.navbar-fixed-top
     .container
       .navbar-header

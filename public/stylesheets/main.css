@@ -30,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	font-size: 35px;
     text-indent: 40px;
-    padding: 40px;
+    padding: 30px;
 }
 
 h3 {
@@ -43,6 +43,7 @@ h4 {
 	font-weight: 400;
 	font-size: 20px;
 }
+
 
 /* Paragraph & Typographic */
 p {
@@ -90,6 +91,10 @@ a:after {
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0;
+}
+
+.hacky {
+    display: none;
 }
 
 .navbar-default {
