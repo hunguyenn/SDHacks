@@ -51,7 +51,7 @@ svg.insert("path")
 var scrollSpeed = 50; var current = 0;
 
 function bgscroll(){
-	current += 2;
+	current += 3;
 	projection.rotate([λ(current), 0]);
    	svg.selectAll("path").attr("d", path);
 }
