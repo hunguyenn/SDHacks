@@ -1,4 +1,4 @@
-var width = 960,
+var width = window.innerWidth,
     height = 500,
     rotate = [10, -10],
     velocity = [.003, -.001],
