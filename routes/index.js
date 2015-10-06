@@ -7,7 +7,7 @@ var geocoder = require('geocoder');
 router.get('/', function(req, res, next) {
 	if(req.query['lenderID']) {
 		request.get('http://api.kivaws.org/v1/lenders/' + req.query['lenderID'] + '/loans.json', function(err, response, body) {
-			var requestResponse = JSON.parse(body)
+			var requestResponse = JSON.parse(body) //stringify this and add to an array of strings?
 			if(requestResponse['loans'] == undefined) {
 				res.redirect('/');
 			} else {
@@ -19,7 +19,6 @@ router.get('/', function(req, res, next) {
 				var counter = 0
 				var places = []
 				var source 
-
 
 				for(var i = 0; i < numPages; i++) {
 					for(var j = 0; j < loansPerPage; j++) {
@@ -40,7 +39,6 @@ router.get('/', function(req, res, next) {
 					}
 				}
 
-				
 				// Use places to plot ()
 				////// Places -> need to get rid of undefined & make cities more consitent (PILAR -> Pilar)
 
@@ -50,12 +48,12 @@ router.get('/', function(req, res, next) {
 				var requestResponse1 = JSON.parse(body1)
 				// console.log(body);
 				var location = requestResponse1['lenders'][0] 
-						geocoder.geocode(location['whereabouts'] + location['country_code'], function ( err, data ) {
-					if(err) throw err;
-					source = data['results'][0]['geometry']['location']
-  					res.render('results', {lenderID: req.query['lenderID'], places: JSON.stringify(places), source: JSON.stringify(source)});
+				geocoder.geocode(location['whereabouts'] + location['country_code'], function ( err, data ) {
+				if(err) throw err;
+				source = data['results'][0]['geometry']['location']
+				res.render('results', {lenderID: req.query['lenderID'], places: JSON.stringify(places), source: JSON.stringify(source)});
 				});
-		});
+			});
 
 				//res.render('results', {lenderID: req.query['lenderID'], places: JSON.stringify(places), source: JSON.stringify(source)});
 			}
