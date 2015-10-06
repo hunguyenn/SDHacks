@@ -12,13 +12,6 @@ body {
   fill: #fff;
 }
 
-.graticule {
-  fill: none;
-  stroke: #777;
-  stroke-width: .5px;
-  stroke-opacity: .5;
-}
-
 .land {
   fill: #86C975;
 }
@@ -27,4 +20,8 @@ body {
   fill: none;
   stroke: #fff;
   stroke-width: .5px;
+}
+
+.sphere {
+  fill: #C2F0FF;
 }

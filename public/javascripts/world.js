@@ -22,20 +22,37 @@ var canvas = d3.select("body").selectAll("canvas")
     .attr("width", width)
     .attr("height", height);
 
-// var places = JSON.parse(document.getElementById("hackyPlaces").value) // places to plot
+// sphere 
+svg.append("path")
+   .datum({type: "Sphere"})
+   .attr("class", "sphere")
+   .attr("d", path);
+
+var places = JSON.parse(document.getElementById("hackyPlaces").value) // places to plot
 
 d3.json("world-110m.json", function(error, world) {
     if(error) { throw error; }
 
     svg.append("path")
-    .datum(topojson.feature(world, world.objects.land))
-    .attr("class", "land")
-    .attr("d", path);
+        .datum(topojson.feature(world, world.objects.land))
+        .attr("class", "land")
+        .attr("d", path);
 
     svg.append("path")
-    .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-    .attr("class", "boundary")
-    .attr("d", path);
+        .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
+        .attr("class", "boundary")
+        .attr("d", path);
+
+    path.pointRadius(3);
+
+    places.forEach(function(d){
+     svg.insert("path", "cities")
+        .datum({type: "Point", coordinates: [d[0], d[1]]})
+        .attr("class", "cities")
+        .attr("fill", "#A556CC")
+        //.attr("fill-opacity", 0.8)
+        .attr("d", path);
+    });
 
     spin_the_globe();
 });
@@ -46,6 +63,7 @@ function spin_the_globe() {
         projection.rotate([rotate[0] + velocity[0] * dt, rotate[1] + velocity[1]]);
         svg.selectAll("path.land").attr("d", path);
         svg.selectAll("path.boundary").attr("d", path);
+        svg.selectAll("path.cities").attr("d", path);
     });
 }
 

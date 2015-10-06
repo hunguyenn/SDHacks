@@ -10,24 +10,29 @@ router.get('/', function(req, res, next) {
 		if(requestResponse['loans'] == undefined) {
 			res.redirect('/');
 		} else {
-			// console.log(body) // Prints out full contents of JSON
+			//console.log(body) // Prints out full contents of JSON
 
-			//var numPages = requestResponse['paging']['pages'] // Need for later, only testing on one page right now
+			var numPages = requestResponse['paging']['pages'] // Need for later, only testing on one page right now
 			var loansPerPage = requestResponse['paging']['page_size']
-			var total = requestResponse['paging']['page_size'] // Add a counter to stop nested loop when necessary
-			var numPages = 1
+			var total = requestResponse['paging']['total'] // Add a counter to stop nested loop when necessary
+			var counter = 0
 			var places = []
+
 			for(var i = 0; i < numPages; i++) {
 				for(var j = 0; j < loansPerPage; j++) {
 					var tempLocation = requestResponse['loans'][j]['location']
 					var longLat = tempLocation['geo']['pairs'].split(' ')
-					places.push({
-						name: tempLocation['town'] + ', ' + tempLocation['country'],
-						location: {
-							longitude: parseFloat(longLat[0]),
-							latitude: parseFloat(longLat[1])
-						}
-					})
+					places.push([parseFloat(longLat[1]), parseFloat(longLat[0])
+						//name: tempLocation['town'] + ', ' + tempLocation['country'],
+						//location: {
+						//	longitude: parseFloat(longLat[0]),
+						//	latitude: parseFloat(longLat[1])
+						//}
+					])
+					counter++
+					if(counter == total) {
+						break;
+					}
 				}
 			}
 			// Use places to plot ()
