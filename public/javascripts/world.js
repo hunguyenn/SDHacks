@@ -1,5 +1,5 @@
 var width = window.innerWidth;
-var height = 500;
+var height = window.innerHeight - 140;
 var time = Date.now();
 var rotate = [0, 0];
 var velocity = [.015, -0];
