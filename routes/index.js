@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
 			if (requestResponse1['lenders'] == undefined) {
 				res.render('/'); // invalid lender ID
 			} else {
-				// var places = [];
 				var source;
 				var numPages;
 				var loansPerPage;
@@ -26,13 +25,6 @@ router.get('/', function(req, res, next) {
 					loansPerPage = requestResponse['paging']['page_size'];
 					total = requestResponse['paging']['total']; // Add a counter to stop nested loop when necessary
 
-					// make into function
-					// for (var i = 0; i < loansPerPage; i++) {
-					// 	var tempLocation = requestResponse['loans'][i]['location'];
-					// 	var longLat = tempLocation['geo']['pairs'].split(' ');
-					// 	places.push([parseFloat(longLat[1]), parseFloat(longLat[0])]);
-					// }
-
 					function addPages(numPages, loansPerPage, page, total, callback) {
 						// console.log(page)						
 						request.get('http://api.kivaws.org/v1/lenders/' + req.query['lenderID'] + '/loans.json?page=' + page, function(err, response, body3) {
@@ -42,8 +34,6 @@ router.get('/', function(req, res, next) {
 							numPages = requestResponse2['paging']['pages'];
 							loansPerPage = requestResponse2['paging']['page_size'];
 							total = requestResponse2['paging']['total']; // Add a counter to stop nested loop when necessary
-							// console.log(requestResponse2)
-							// make into function
 							var upperLimit = loansPerPage;
 							if (numPages == page) {
 								upperLimit = total % loansPerPage;
@@ -53,12 +43,10 @@ router.get('/', function(req, res, next) {
 								var longLat = tempLocation['geo']['pairs'].split(' ');
 								tempArray.push([parseFloat(longLat[1]), parseFloat(longLat[0])]);
 							}
-							//console.log(tempArray);
 							callback(tempArray, page);
 						});
 					}
 
-					//put all this shit in a callback
 					function addPlaces(numPages, total, callback) {
 						var place = [];
 						for (var j = 1; j <= numPages; j++) {
@@ -69,11 +57,7 @@ router.get('/', function(req, res, next) {
 								}
 							});
 						}
-						// console.log(place);
-						//callback(places);
 					}
-
-					var places = [];
 
 					addPlaces(numPages, total, function(places) {
 						var location = requestResponse1['lenders'][0];
