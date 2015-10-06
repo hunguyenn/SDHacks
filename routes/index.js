@@ -64,7 +64,6 @@ router.get('/', function(req, res, next) {
 								places.concat(x);
 							});
 						}
-
 					}
 
 					
