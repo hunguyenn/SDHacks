@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 	if (req.query['lenderID']) {
 		request.get('http://api.kivaws.org/v1/lenders/' + req.query['lenderID'] + '.json', function(err, response, body1) {
 			// can access user image in here
+			if(!err) {
 			var requestResponse1 = JSON.parse(body1)
 			if (requestResponse1['lenders'] == undefined) {
 				res.render('/'); // invalid lender ID
@@ -25,8 +26,7 @@ router.get('/', function(req, res, next) {
 					loansPerPage = requestResponse['paging']['page_size'];
 					total = requestResponse['paging']['total']; // Add a counter to stop nested loop when necessary
 
-					function addPages(numPages, loansPerPage, page, total, callback) {
-						// console.log(page)						
+					function addPages(numPages, loansPerPage, page, total, callback) {						
 						request.get('http://api.kivaws.org/v1/lenders/' + req.query['lenderID'] + '/loans.json?page=' + page, function(err, response, body3) {
 							if (err) throw err;
 							var tempArray = [];
@@ -72,8 +72,11 @@ router.get('/', function(req, res, next) {
 						});
 					});
 				});
-
 			}
+		} else {
+			// handle no internetz
+			res.render('error', {error: { status: 'NO INTERNETZ'}});	
+		}
 		});
 	} else {
 		res.render('/'); // no lender id = ___ in url
