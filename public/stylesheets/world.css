@@ -2,6 +2,10 @@ body {
   background: #17323B;
 }
 
+.space {
+  fill: #C2F0FF;
+}
+
 .stroke {
   fill: none;
   stroke: #000;
@@ -25,3 +29,23 @@ body {
 .sphere {
   fill: #C2F0FF;
 }
+
+.arcs {
+  opacity:.1;
+  stroke: gray;
+  stroke-width: 3;
+}
+
+.flyers {
+  stroke-width:1;
+  opacity: .6;
+  stroke: darkred; 
+}
+
+.arc, .flyer {
+  stroke-linejoin: round;
+  fill:none;
+}
+  .arc { }
+  .flyer { }
+  .flyer:hover { }
