@@ -4,23 +4,13 @@ var time = Date.now();
 var rotate = [0, 0];
 var velocity = [.015, 0];
 
-// var space = d3.geo.orthographic()
-//     .scale(750)
-//     .translate([width / 2, height / 2])
-
-// var spacePath = d3.geo.path()
-//     .projection(projection)
-//     .pointRadius(1);
-
-var projection = d3.geo.orthographic()
-    .scale(250)
+var projection = d3.geo.equirectangular()
+    .scale(150)
     .translate([width / 2, height / 2])
-    .clipAngle(90);
 
-var sky = d3.geo.orthographic()
-    .scale(300)
+var sky = d3.geo.equirectangular()
+    .scale(150)
     .translate([width / 2, height / 2])
-    .clipAngle(90);
 
 var swoosh = d3.svg.line()
     .x(function(d) { return d[0] })
@@ -28,7 +18,6 @@ var swoosh = d3.svg.line()
     .interpolate("cardinal")
     .tension(.0);
 
-// var scale0 = projection.scale();
 
 var path = d3.geo.path()
     .projection(projection);
@@ -38,18 +27,6 @@ var svg = d3.select("body")
     .attr("width", width)
     .attr("height", height);
 
-// var stars = svg.append("g")
-//     .selectAll("g")
-//     .data(starList)
-//     .enter()
-//     .append("path")
-//     .attr("class", "star")
-//     .attr("d", function(d) {
-//         spacePath.pointRadius(d.properties.radius);
-//         return spacePath(d);
-//     });
-
-
 // sphere 
 svg.append("path")
     .datum({
@@ -57,26 +34,6 @@ svg.append("path")
     })
     .attr("class", "sphere")
     .attr("d", path);
-
-// space
-
-// var starList = createStars(300);
-
-// var stars = svg.append("g")
-//     .selectAll("g")
-//     .data(starList)
-//     .enter()
-//     .append("path")
-//     .attr("class", "star")
-//     .attr("d", function(d) {
-//         spacePath.pointRadius(d.properties.radius);
-//         return spacePath(d);
-//     });
-
-// var g = svg.append("g"),
-//             features;
-
-
 
 var places = JSON.parse(document.getElementById("hackyPlaces").value) // places to plot
 var source = JSON.parse(document.getElementById("hackySource").value) // source point to plot
@@ -178,54 +135,19 @@ d3.json("world-110m.json", function(error, world) {
         .attr("class","flyer")
         .attr("d", function(d) { return swoosh(create_arc(d)) })
 
-    spin_the_globe();
+    // spin_the_globe();
    
 });
 
-function refresh() {  
-  // svg.selectAll(".arc").attr("d", path)
-  //   .attr("opacity", function(d) {
-  //       return fade_at_edge(d)
-  //   })
-
-  svg.selectAll(".flyer")
-    .attr("d", function(d) { return swoosh(create_arc(d)) })
-    // .attr("opacity", function(d) {
-    //   return fade_at_edge(d)
-    // }) 
-}
-
-function spin_the_globe() {
-    d3.timer(function() {
-        var dt = Date.now() - time;
-        projection.rotate([rotate[0] + velocity[0] * dt, rotate[1] + velocity[1]]);
-        svg.selectAll("path.land").attr("d", path);
-        svg.selectAll("path.boundary").attr("d", path);
-        svg.selectAll("path.cities").attr("d", path);
-        svg.selectAll("path.source").attr("d", path);
-        svg.selectAll("path.arcs").attr("d", path);
-        svg.selectAll("path.flyers").attr("d", path);
-        refresh();
-    });
-}
-
-// function createStars(number) {
-//     var data = [];
-//     for (var i = 0; i < number; i++) {
-//         data.push({
-//             geometry: {
-//                 type: 'Point',
-//                 coordinates: randomLonLat()
-//             },
-//             type: 'Feature',
-//             properties: {
-//                 radius: Math.random() * 1.5
-//             }
-//         });
-//     }
-//     return data;
-// }
-
-// function randomLonLat() {
-//     return [Math.random() * 360 - 180, Math.random() * 180 - 90];
+// function spin_the_globe() {
+//     d3.timer(function() {
+//         var dt = Date.now() - time;
+//         projection.rotate([rotate[0] + velocity[0] * dt, rotate[1] + velocity[1]]);
+//         svg.selectAll("path.land").attr("d", path);
+//         svg.selectAll("path.boundary").attr("d", path);
+//         svg.selectAll("path.cities").attr("d", path);
+//         svg.selectAll("path.source").attr("d", path);
+//         svg.selectAll("path.arcs").attr("d", path);
+//         svg.selectAll("path.flyers").attr("d", path);
+//     });
 // }
